@@ -29,29 +29,44 @@ export class PrincipalComponent implements OnInit{
     })
   }
 
-  cadastrar():void{
-    this.servico.cadastrar(this.cliente).subscribe((retorno)=>{
-      this.clientes.push(retorno);
+  novoCliente():void{
+    this.btnCadastro = false;
+  }
 
-      this.cliente = new Cliente();
-      alert('Cliente castrado com sucesso!')
-    })
+  cadastrar():void{
+    if(this.cliente.nome === '' || this.cliente.idade === 0 || this.cliente.cidade === '' ){
+      alert('Preencha os campos obrigatorios');
+    }
+    else{
+      this.servico.cadastrar(this.cliente).subscribe((retorno)=>{
+        this.clientes.push(retorno);
+  
+        this.cliente = new Cliente();
+        alert('Cliente castrado com sucesso!')
+      })
+    }
   }
 
   editar():void{
-    this.servico.editar(this.cliente).subscribe((retorno)=>{
-      this.clientes.push(retorno);
-      let posicao = this.clientes.findIndex((obj)=>{
-        return obj.codigo == retorno.codigo;
-      });
-
-      this.clientes[posicao] = retorno;
-
-      this.tabela = true;
-      this.btnCadastro = true;
-      this.cliente = new Cliente();
-      alert('Cliente editado com sucesso!')
-    })
+    if(this.cliente.nome === '' || this.cliente.idade === 0 || this.cliente.cidade === '' ){
+      alert('Preencha os campos obrigatorios')
+    }
+    else{
+      console.log('teste:', this.cliente.cidade);
+        this.servico.editar(this.cliente).subscribe((retorno)=>{
+          this.clientes.push(retorno);
+          let posicao = this.clientes.findIndex((obj)=>{
+            return obj.codigo == retorno.codigo;
+          });
+    
+          this.clientes[posicao] = retorno;
+    
+          this.tabela = true;
+          this.btnCadastro = true;
+          this.cliente = new Cliente();
+          alert('Cliente editado com sucesso!')
+        })
+    }
   }
 
   remover():void{
@@ -77,8 +92,9 @@ export class PrincipalComponent implements OnInit{
     this.tabela = false;
   }
 
-  goToHome() {
-    this.router.navigate(['/detalhar']);
+  aoClicarDetalhar(cliente: Cliente) {
+    this.servico.salvarClienteSelecionado(cliente);
+    this.router.navigate(['principal/detalhar']);
   }
 
   aoClicarCancelar(){

@@ -6,8 +6,8 @@ import { PrincipalComponent } from './principal/principal.component';
 import { FormsModule } from '@angular/forms';
 
 import { HttpClientModule } from '@angular/common/http';
-import { DetalharComponent } from './detalhar/detalhar.component';
 import { AppRoutingModule } from './app-routing.module';
+import { DetalharComponent } from './principal/detalhar/detalhar.component';
 @NgModule({
   declarations: [
     AppComponent,

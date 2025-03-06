@@ -1,0 +1,30 @@
+<div class="card">
+
+  <div class="row">
+      <div class="col-4">
+          <p>Nome</p>
+          <select class="form-select" aria-label="Default select example">
+              <option [selected]="cliente.nome === this.cliente.nome" *ngFor="let cliente of clientes" [value]="cliente.codigo">
+                  {{ cliente.nome }}
+                </option>
+          </select>
+      </div>
+      <div class="col-4">
+        <p>Idade</p>
+          <select class="form-select" aria-label="Default select example">
+              <option *ngFor="let cliente of clientes" [value]="cliente.idade">
+                  {{ cliente.idade + ' anos' }}
+                </option>
+          </select>
+      </div>
+      <div class="col-4">
+        <p>Cidade</p>
+          <select class="form-select" aria-label="Default select example" (change)="teste($event)">
+              <option *ngFor="let cliente of clientes" [value]="cliente.cidade">
+                  {{ cliente.cidade }}
+                </option>
+            </select>
+      </div>
+    </div>
+    <button class="btn btn-secondary" (click)="voltar()">Voltar</button>
+</div>

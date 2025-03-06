@@ -1,35 +1,42 @@
 <form>
-    <img src="assets/cliente.png">
-    <input type="text" placeholder="Nome" class="form-control" name="nome"    [(ngModel)]="cliente.nome">
-    <input type="number" placeholder="Idade" class="form-control" name="idade" [(ngModel)]="cliente.idade">
-    <input type="text" placeholder="Cidade" class="form-control" name="cidade"[(ngModel)]="cliente.cidade">
-
-    <input type="button" value="Cadastrar" class="btn btn-primary" *ngIf="btnCadastro" (click)="cadastrar()">
+    <div *ngIf="!btnCadastro">    
+        <img src="assets/cliente.png">
+        <input type="text" placeholder="Nome" class="form-control" name="nome"    [(ngModel)]="cliente.nome">
+        <input type="number" placeholder="Idade" class="form-control" name="idade" [(ngModel)]="cliente.idade">
+        <input type="text" placeholder="Cidade" class="form-control" name="cidade"[(ngModel)]="cliente.cidade">
+        <input type="text" placeholder="Pais" class="form-control" name="pais"[(ngModel)]="cliente.pais">
+    </div>
+    
+    <input type="button" value="Cadastrar" class="btn btn-primary" *ngIf="!btnCadastro" (click)="cadastrar()">
     <input type="button" value="Alterar" class="btn btn-warning"*ngIf="!btnCadastro" (click)="editar()">
     <input type="button" value="Remover" class="btn btn-danger"*ngIf="!btnCadastro" (click)="remover()">
     <input type="button" value="Cancelar" class="btn btn-secondary"*ngIf="!btnCadastro" (click)="aoClicarCancelar()">
+    <input type="button" value="Novo Cliente" class="btn btn-primary" *ngIf="btnCadastro" (click)="novoCliente()">
 </form>
-<table *ngIf="tabela" class="table">
-    <thead>
-        <tr>
-            <th></th>
-            <th>Nome</th>
-            <th>Idade</th>
-            <th>Cidade</th>
-            <th>Selecionar</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let c of clientes; index as i">
-            <td>{{ i + 1 }}</td>
-            <td>{{ c.nome}}</td>
-            <td>{{ c.idade}}</td>
-            <td>{{ c.cidade}}</td>
-            <td>
-                <button class="btn btn-success" (click)="aoClicarSelecionar(i)">Selecionar</button>
-                <button [routerLink]="['/detalhar']">Ir para Detalhar</button>
-                <button class="btn btn-secondary" (click)="goToHome()">Ir para Home</button>
-            </td>
-        </tr>
-    </tbody>
-</table>
+<div class="tabela">
+    <table *ngIf="tabela" class="table">
+        <thead>
+            <tr>
+                <th></th>
+                <th>Nome</th>
+                <th>Idade</th>
+                <th>Cidade</th>
+                <th>Selecionar</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let c of clientes; index as i">
+                <td>{{ i + 1 }}</td>
+                <td>{{ c.nome}}</td>
+                <td>{{ c.idade  + ' anos'}}</td>
+                <td>{{ c.cidade}}</td>
+                <td>{{ c.pais }}</td>
+
+                <td>
+                    <button class="btn btn-success" (click)="aoClicarSelecionar(i)">Selecionar</button>
+                    <button class="btn btn-secondary" (click)="aoClicarDetalhar(c)">Detalhar</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

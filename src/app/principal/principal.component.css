@@ -16,3 +16,9 @@ input{
 input[type="button"]{
     margin-right: 10px;
 }
+
+.tabela{
+    margin-left: 6em;
+    margin-right: 6em;
+
+}

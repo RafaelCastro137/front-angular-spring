@@ -9,6 +9,8 @@ import { Cliente } from '../modelo/Cliente';
 export class ClienteService {
   private url: string = 'http://localhost:8080'
 
+  cliente!: Cliente;
+
   constructor(
     private http: HttpClient
   ) { }
@@ -27,5 +29,13 @@ export class ClienteService {
 
   remover(codigo: number): Observable<void> {
     return this.http.delete<void>(this.url + '/' + codigo);
+  }
+
+  salvarClienteSelecionado(obj: Cliente){
+    this.cliente = obj;
+  }
+
+  consultarClienteSelecionadoar(): Cliente{
+    return this.cliente ;
   }
 }
